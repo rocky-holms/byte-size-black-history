@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 try:
     DB_URL = os.environ["DB_URL"]
-except:
+except Exception:
     raise Exception('MUST SET "DB_URL" ENVIRONMENT VARIABLE')
 
 

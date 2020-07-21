@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy_utils import ArrowType, EmailType, URLType
 
 from db import Base
-from sqlalchemy_utils import EmailType, URLType, UUIDType
 
 
 class Subscriber(Base):
@@ -11,18 +11,10 @@ class Subscriber(Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(EmailType, unique=True, nullable=False)
+    subscription_id = Column(String, unique=True, nullable=True)
 
     def __repr__(self):
         return f"Subscriber {self.name}"
-
-
-class ChangeEmail(Base):
-    """Email validation Model for subscriber email change"""
-
-    __tablename__ = "change_email"
-
-    email = Column(EmailType, nullable=False)
-    uid = Column(UUIDType, nullable=False)
 
 
 class WikiLinks(Base):
@@ -31,3 +23,4 @@ class WikiLinks(Base):
     __tablename__ = "wiki_links"
 
     url = Column(URLType, nullable=False)
+    date_used = Column(ArrowType)

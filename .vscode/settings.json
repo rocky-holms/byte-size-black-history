@@ -8,11 +8,11 @@
     "python.linting.pycodestyleEnabled": false,
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
-    "[python]": {
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
-    },
+    // "[python]": {
+    //     "editor.codeActionsOnSave": {
+    //         "source.organizeImports": true
+    //     }
+    // },
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length=120",

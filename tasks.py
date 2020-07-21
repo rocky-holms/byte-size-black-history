@@ -1,45 +1,55 @@
+from db import db_session
+from models import Subscriber
+
 import logging
 
-import stripe
 
-from db import db_session
-from models import Company
+def start_subscription(email: str) -> bool:
+    """
+    Signup a subscriber.
 
+    Args:
+        email (str): email of subscriber signing up.
 
-def company_information_to_db(information: dict) -> bool:
+    Returns:
+        bool: Indicates if signup was successful
+    """
     try:
-        company = Company(**information)
-        db_session.add(company)
+        subscriber = Subscriber(email=email)
+        db_session.add(subscriber)
         db_session.commit()
         return True
-    except Exception:
-        logging.error(f"Unable to save company information to db: {information}")
+    except Exception as e:
+        logging.error(f"Unable to create subscription for: {email} | Error {e}")
         return False
 
 
-def email_signup(email: str, subscription_id: str = None):
-    pass
+def stop_subscription(email: str) -> bool:
+    """Cancel a subscription.
 
-
-def cancel_service(email: str):
-    pass
+    Args:
+        email (str): [email associated with subscriber]
+    """
+    try:
+        subscriber = Subscriber.query.filter_by(email=email).one()
+        db_session.delete(subscriber)
+        db_session.commit()
+        return True
+    except Exception as e:
+        logging.error(f"Unable to cancel subscription for: {email} | Error {e}")
+        return False
 
 
 def send_email(title: str, wikipedia_url: str):
-    pass
+    """Send daily email with Wiki link to Afrian American activist.
 
-
-def change_email(current_email: str, new_email: str):
-    pass
-
-
-def update_credit_card(new_subscription_id: str):
+    Args:
+        title (str): Title of the email being sent.
+        wikipedia_url (str): URL link to activist.
+    """
     pass
 
 
 def send_daily_email():
     pass
 
-
-def finalize_email_change(email_change_code: str):
-    pass

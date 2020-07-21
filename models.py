@@ -17,10 +17,10 @@ class Subscriber(Base):
         return f"Subscriber {self.name}"
 
 
-class WikiLinks(Base):
+class WikiLink(Base):
     """Wiki links Model"""
 
     __tablename__ = "wiki_links"
 
     url = Column(URLType, nullable=False)
-    date_used = Column(ArrowType)
+    date_used = Column(ArrowType, nullable=False)

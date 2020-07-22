@@ -36,10 +36,24 @@ These are the list of envvironement variables that need to be set in the postact
    3. `from models import Subscriber, Wikilink`
    4. `Base.metadata.create_all(engine)`
 
+### Crontab
+
+1. Will need to be set with the following
+   1. `0 0 * * * /usr/bin/python send_daily_email.py`
+
 ## Start the server
 
 1. the server can be started by running:
    1. `uvicorn api:app`
+
+## Tests
+
+1. Tests currently need to be expanded on due to time constraints
+   1. currently only test tasks
+   2. need to add testing for:
+      1. Models
+      2. Some of the email tests with Mailgun API
+      3. The API calls with FastAPI
 
 ## Project Information
 

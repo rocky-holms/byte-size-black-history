@@ -4,7 +4,7 @@
 
 1. This is a website to subscribe to daily emails with a link to different African American activist
    1. Will receive an email daily.
-   2. Email will contain a link to donations page to different organizations.
+   2. Email will contain a link to donations page to different African American organizations.
    3. Email will contain a different email link sent daily.
 
 ## Setup

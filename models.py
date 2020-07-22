@@ -1,9 +1,5 @@
 import arrow
-<<<<<<< HEAD
 from sqlalchemy import Boolean, Column, Integer, Text
-=======
-from sqlalchemy import Boolean, Column, Integer, DateTime, Text
->>>>>>> 00b1ae0155e4eb97f80fd787486c24f3a18fc6b6
 from sqlalchemy_utils import ArrowType, EmailType, URLType
 
 from db import Base

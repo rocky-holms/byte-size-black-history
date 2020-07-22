@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Additional Improvements
 
 1. I would add additional testing
@@ -9,7 +8,5 @@
    1. Use vue for frontend
 5. Add all emails to a queue and then have a process send the emails from a queue
    1. Start with using Postgres table as the queue
-=======
-+ Add all emails to a queue and then have a process send the emails from a queue
-  + Start with using Postgres table as the queue
->>>>>>> 00b1ae0155e4eb97f80fd787486c24f3a18fc6b6
+6. Add all emails to a queue and then have a process send the emails from a queue
+   1. Start with using Postgres table as the queue

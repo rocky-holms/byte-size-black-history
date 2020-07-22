@@ -2,7 +2,7 @@
 
 ## Purpose
 
-1. This is a website to subscribe to daily emails with a link to different African American activist
+1. This is a website to subscribe to daily emails with a link to different African American History
    1. Will receive an email daily.
    2. Email will contain a link to donations page to different African American organizations.
    3. Email will contain a different wiki link sent daily.
@@ -72,6 +72,6 @@ These are the list of envvironement variables that need to be set in the postact
    1. confirmation email is sent to subscribe
 4. Emails are sent at midnight everyday to all subscribers
    1. email contains donations page
-   2. Wiki link to activist
+   2. Wiki link to Black History
    3. unsubscribe option
-5. I am including a list of activist to be imported to the database via SQLAlchemy
+5. I am including a list of Black History links to be imported to the database via SQLAlchemy

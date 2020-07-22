@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+        body {
+            background: #ddd;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h3 {
+            text-transform: none;
+            font-size: 28px;
+            letter-spacing: 1px;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 0 0 15px 0;
+            padding: 0;
+            color: #555;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        form {
+            width: 50%;
+            margin: 100px auto;
+            padding: 50px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .donation-list {
+            display: flex;
+            margin-top: 30px;
+            /* border:2px solid red; */
+        }
+
+        li {
+            list-style: none;
+        }
+
+        li a {
+            text-decoration: none;
+            /* border:2px solid olive; */
+            color: white;
+            margin-left: 4px;
+            background-color: #FF6C54;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 414px) {
+            .form {
+                /* width: 50%; */
+                margin: 100px auto;
+                padding: 33px;
+                background-color: #fff;
+                text-align: center;
+            }
+
+            .donation-list {
+                display: block;
+                margin-top: 30px;
+                border: 2px solid red;
+                padding: 30px 0px;
+            }
+
+            li {
+                list-style: none;
+                margin-top: 23px;
+            }
+
+            li a {
+                text-decoration: none;
+                /* border: 2px solid olive; */
+                color: white;
+                margin-left: 4px;
+                background-color: #FF6C54;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form>
+            <h3>Consider donating to these organization working everyday to improve equality.</h3>
+            <ul class="donation-list">
+                <li><a href=" https://www.naacp.org/Donate/">NAACP Donation</a></li>
+                <li><a href=" https://action.aclu.org/give/now">ACLU Donation</a></li>
+                <li><a href="  https://www.knowyourrightscamp.com"> Know your rights</a></li>
+                <li><a href="https://secure.actblue.com/donate/ms_blm_homepage_2019">Black Lives Matter</a></li>
+            </ul>
+        </form>
+    </div>
+</body>
+
+</html>

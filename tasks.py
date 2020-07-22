@@ -6,7 +6,8 @@ import requests
 
 from db import db_session
 from models import Subscriber, WikiLink
-from utils import create_email_text
+from get_emails import link_email, subscribed_email
+
 
 try:
     MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
@@ -20,8 +21,7 @@ except Exception:
 
 
 def start_subscription(email: str) -> bool:
-    """
-    Signup a subscriber.
+    """Signup a subscriber.
 
     Args:
         email (str): email of subscriber signing up.
@@ -32,6 +32,18 @@ def start_subscription(email: str) -> bool:
     try:
         subscriber = Subscriber(email=email)
         db_session.add(subscriber)
+
+        send_confirmation_email(email)
+        return True
+    except Exception as e:
+        logging.error(f"Unable to create subscription for: {email} | Error {e}")
+        return False
+
+
+def subscription_confirmation(email: str) -> bool:
+    """TODO make it confirmed"""
+    try:
+        db_session.query(Subscriber).filter(Subscriber.email == email).update(Subscriber.is_subscribed is True)
         db_session.commit()
         return True
     except Exception as e:
@@ -40,15 +52,13 @@ def start_subscription(email: str) -> bool:
 
 
 def stop_subscription(email: str) -> bool:
-    """
-    Cancel a subscription.
+    """Cancel a subscription.
 
     Args:
         email (str): [email associated with subscriber]
     """
     try:
-        subscriber = Subscriber.query.filter_by(email=email).one()
-        db_session.delete(subscriber)
+        db_session.query(Subscriber).filter(Subscriber.email == email).update(Subscriber.is_subscribed is False)
         db_session.commit()
         return True
     except Exception as e:
@@ -56,9 +66,29 @@ def stop_subscription(email: str) -> bool:
         return False
 
 
-def send_email_to_subscribers(title: str, text: str, subscribers: list) -> int:
+def send_confirmation_email(email: str) -> int:
+    """Send confirmation email.
+
+    Args:
+        title (str): Title of the email being sent.
+        wikipedia_url (str): URL link to activist.
     """
-    Send daily email with Wiki link to Afrian American activist.
+
+    response = requests.post(
+        DOMAIN_NAME,
+        auth=("api", MAILGUN_API_KEY),
+        data={
+            "from": "Knowledgeable Donations <email.knowledgeabledonations.xyz>",
+            "to": email,
+            "subject": "Thank you for subscribing!",
+            "html": subscribed_email(email),
+        },
+    )
+    return response.status_code
+
+
+def send_link_email(title: str, html: str, subscribers: list) -> int:
+    """Send daily email with Wiki link to Afrian American activist.
 
     Args:
         title (str): Title of the email being sent.
@@ -72,20 +102,23 @@ def send_email_to_subscribers(title: str, text: str, subscribers: list) -> int:
             "from": "Knowledgeable Donations <email.knowledgeabledonations.xyz>",
             "to": subscribers,
             "subject": title,
-            "text": text,
+            "html": html,
         },
     )
     return response.status_code
 
 
-def send_email_main() -> None:
+def send_email_to_subscribers() -> None:
     """
     Compile email to send to subscribers.
     """
-    subscribers: list = db_session.query(Subscriber).all()
-    wiki_link = db_session.select(WikiLink).where(WikiLink.date_used is None).one()
+    subscribers: list = db_session.query(Subscriber).filter_by(is_subscribed=True)
+    wiki_link = WikiLink.where(WikiLink.date_used is None).limit(1)
 
-    send_email_to_subscribers("Knowledgeable Donations", create_email_text(wiki_link.url), subscribers)
+    email_html = link_email("Today's Wikipedia Link", wiki_link.url)
+
+    for subscriber in subscribers:
+        send_link_email(wiki_link.title, email_html, subscriber)
 
     wiki_link.date_used = arrow.utcnow()
     db_session.commit()

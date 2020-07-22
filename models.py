@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String
+import arrow
+from sqlalchemy import Boolean, Column, Integer, DateTime, Text
 from sqlalchemy_utils import ArrowType, EmailType, URLType
 
 from db import Base
@@ -10,11 +11,14 @@ class Subscriber(Base):
     __tablename__ = "subscriber"
 
     id = Column(Integer, primary_key=True)
+    created_ts = Column(ArrowType, default=arrow.utcnow())
+    updated_ts = Column(ArrowType)
+
     email = Column(EmailType, unique=True, nullable=False)
-    subscription_id = Column(String, unique=True, nullable=True)
+    is_subscribed = Column(Boolean, default=False)
 
     def __repr__(self):
-        return f"Subscriber {self.name}"
+        return f"Subscriber {self.email}"
 
 
 class WikiLink(Base):
@@ -22,5 +26,10 @@ class WikiLink(Base):
 
     __tablename__ = "wiki_links"
 
+    id = Column(Integer, primary_key=True)
+    created_ts = Column(ArrowType, default=arrow.utcnow())
+    updated_ts = Column(ArrowType)
+
     url = Column(URLType, nullable=False)
+    title = Column(Text, nullable=False)
     date_used = Column(ArrowType, nullable=False)

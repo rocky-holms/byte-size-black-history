@@ -122,4 +122,3 @@ def send_email_to_subscribers() -> None:
 
     wiki_link.date_used = arrow.utcnow()
     db_session.commit()
-

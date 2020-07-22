@@ -75,4 +75,3 @@ These are the list of envvironement variables that need to be set in the postact
    2. Wiki link to activist
    3. unsubscribe option
 5. I am including a list of activist to be imported to the database via SQLAlchemy
-

@@ -16,4 +16,3 @@ Base = declarative_base()
 
 Session = sessionmaker(bind=engine)
 db_session = Session()
-

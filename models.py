@@ -33,3 +33,4 @@ class WikiLink(Base):
     url = Column(URLType, nullable=False)
     title = Column(Text, nullable=False)
     date_used = Column(ArrowType, nullable=False)
+

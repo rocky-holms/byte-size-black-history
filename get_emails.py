@@ -35,3 +35,4 @@ def subscribed_email(email: str):
     </html>
     """
     return text
+

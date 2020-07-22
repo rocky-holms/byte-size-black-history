@@ -34,3 +34,4 @@ def test_send_email_to_subscribers(response):
     value = tasks.send_email_to_subscribers()
 
     assert value is None
+

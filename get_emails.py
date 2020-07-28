@@ -1,4 +1,9 @@
-from tasks import DOMAIN_NAME
+import os
+
+try:
+    DOMAIN_NAME = os.environ["DOMAIN_NAME"]
+except Exception:
+    raise Exception('MUST SET "DOMAIN_NAME" ENVIRONMENT VARIABLE')
 
 
 def link_email(title: str, wiki_link: str) -> str:

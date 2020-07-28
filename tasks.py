@@ -89,7 +89,7 @@ def send_confirmation_email(email: str) -> int:
         f"https://api.mailgun.net/v3/{DOMAIN_NAME}/messages",
         auth=("api", MAILGUN_API_KEY),
         data={
-            "from": "Knowledgeable Donations <email.knowledgeabledonations.xyz>",
+            "from": "Byte Size Black History <mailgun@YOUR_DOMAIN",
             "to": email,
             "subject": "Thank you for subscribing!",
             "html": subscribed_email(email),
@@ -110,7 +110,7 @@ def send_link_email(title: str, html: str, subscriber: str) -> int:
         f"https://api.mailgun.net/v3/{DOMAIN_NAME}/messages",
         auth=("api", MAILGUN_API_KEY),
         data={
-            "from": "Byte Size Black History <mailgun@bytesizeblackhistory.online>",
+            "from": "Byte Size Black History <mailgun@YOUR_DOMAIN>",
             "to": subscriber,
             "subject": title,
             "html": html,

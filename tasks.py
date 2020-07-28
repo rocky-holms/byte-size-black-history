@@ -41,7 +41,14 @@ def start_subscription(email: str) -> bool:
 
 
 def subscription_confirmation(email: str) -> bool:
-    """TODO make it confirmed"""
+    """Allow subscriber to confirm subscription
+
+    Args:
+        email (str): email of subscriber
+
+    Returns:
+        bool: if the subscription was created successfully
+    """
     try:
         db_session.query(Subscriber).filter(Subscriber.email == email).update(
             Subscriber.is_subscribed is True
@@ -79,7 +86,7 @@ def send_confirmation_email(email: str) -> int:
     """
 
     response = requests.post(
-        DOMAIN_NAME,
+        f"https://api.mailgun.net/v3/{DOMAIN_NAME}/messages",
         auth=("api", MAILGUN_API_KEY),
         data={
             "from": "Knowledgeable Donations <email.knowledgeabledonations.xyz>",

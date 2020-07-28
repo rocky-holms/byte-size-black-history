@@ -98,7 +98,7 @@ def send_confirmation_email(email: str) -> int:
     return response.status_code
 
 
-def send_link_email(title: str, html: str, subscribers: list) -> int:
+def send_link_email(title: str, html: str, subscriber: str) -> int:
     """Send daily email with Wiki link to Afrian American activist.
 
     Args:
@@ -111,7 +111,7 @@ def send_link_email(title: str, html: str, subscribers: list) -> int:
         auth=("api", MAILGUN_API_KEY),
         data={
             "from": "Byte Size Black History <mailgun@bytesizeblackhistory.online>",
-            "to": subscribers,
+            "to": subscriber,
             "subject": title,
             "html": html,
         },
@@ -129,7 +129,7 @@ def send_email_to_subscribers() -> None:
     email_html = link_email("Today's Wikipedia Link", wiki_link.url)
 
     for subscriber in subscribers:
-        send_link_email(wiki_link.title, email_html, subscriber)
+        send_link_email(wiki_link.title, email_html, subscriber.email)
 
     wiki_link.date_used = arrow.utcnow()
     db_session.commit()

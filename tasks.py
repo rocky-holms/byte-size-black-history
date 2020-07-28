@@ -43,7 +43,9 @@ def start_subscription(email: str) -> bool:
 def subscription_confirmation(email: str) -> bool:
     """TODO make it confirmed"""
     try:
-        db_session.query(Subscriber).filter(Subscriber.email == email).update(Subscriber.is_subscribed is True)
+        db_session.query(Subscriber).filter(Subscriber.email == email).update(
+            Subscriber.is_subscribed is True
+        )
         db_session.commit()
         return True
     except Exception as e:
@@ -58,7 +60,9 @@ def stop_subscription(email: str) -> bool:
         email (str): [email associated with subscriber]
     """
     try:
-        db_session.query(Subscriber).filter(Subscriber.email == email).update(Subscriber.is_subscribed is False)
+        db_session.query(Subscriber).filter(Subscriber.email == email).update(
+            Subscriber.is_subscribed is False
+        )
         db_session.commit()
         return True
     except Exception as e:
@@ -99,7 +103,7 @@ def send_link_email(title: str, html: str, subscribers: list) -> int:
         f"https://api.mailgun.net/v3/{DOMAIN_NAME}/messages",
         auth=("api", MAILGUN_API_KEY),
         data={
-            "from": "Knowledgeable Donations <email.knowledgeabledonations.xyz>",
+            "from": "Byte Size Black History <mailgun@bytesizeblackhistory.online>",
             "to": subscribers,
             "subject": title,
             "html": html,

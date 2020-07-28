@@ -2,7 +2,11 @@ from fastapi import FastAPI, Request, Form, status
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from tasks import send_confirmation_email, start_subscription, stop_subscription, subscription_confirmation
+from tasks import (
+    start_subscription,
+    stop_subscription,
+    subscription_confirmation,
+)
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -14,7 +18,9 @@ class FormData(BaseModel):
 
 @app.post("/confirmation/subscribe")
 def subscribe(request: Request, email: str = Form("body")):
-    return RedirectResponse(f"/confirmation/subscribe/{email}", status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(
+        f"/confirmation/subscribe/{email}", status_code=status.HTTP_303_SEE_OTHER
+    )
 
 
 @app.get("/confirmation/{confirmation_type}/{email}")
@@ -30,9 +36,12 @@ async def read_item(request: Request, confirmation_type: str, email: str):
         message = "You have been successfully unsubscribed."
     elif confirmation_type == "confirm":
         subscription_confirmation(email)
-        message = "You have been successfully confirmed. Your first email will arrive tomorrow."
+        message = (
+            "You have been successfully confirmed. Your first email will arrive tomorrow."
+        )
     return templates.TemplateResponse(
-        "confirmation.html", {"request": request, "confirmation_type": confirmation_type, "message": message}
+        "confirmation.html",
+        {"request": request, "confirmation_type": confirmation_type, "message": message},
     )
 
 
@@ -44,4 +53,3 @@ async def donate(request: Request):
 @app.get("/")
 async def landing_page(request: Request):
     return templates.TemplateResponse("landing_page.html", {"request": request})
-

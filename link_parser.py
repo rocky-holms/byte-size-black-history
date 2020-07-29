@@ -28,6 +28,14 @@ if not os.path.isfile(filename):
 
 
 def parsed_link_data(line: str) -> Union[list, None]:
+    """Parse link data to be commited via sqlalchemy.
+
+    Args:
+        line (str): link to page.
+
+    Returns:
+        Union[list, None]: return data if any data to return.
+    """
     if line:
         try:
             parsed_line: list = line.split("/")
@@ -39,7 +47,12 @@ def parsed_link_data(line: str) -> Union[list, None]:
             logging.error(f"Unable to parse line {line} | Error: {e}")
 
 
-def link_to_db(link_data: dict) -> bool:
+def link_to_db(link_data: dict) -> None:
+    """Commit link and title to the DB.
+
+    Args:
+        link_data (dict): data for the Wikilink model.
+    """
     try:
         insert_statement = insert(WikiLink).values(link_data)
         db_session.execute(insert_statement)
@@ -49,6 +62,11 @@ def link_to_db(link_data: dict) -> bool:
 
 
 def parse_links(filename) -> None:
+    """Parse links and commits to DB.
+
+    Args:
+        filename ([type]): Name of the file with links.
+    """
     with open(filename) as f:
         content = f.readlines()
 

@@ -31,6 +31,14 @@ def link_email(title: str, wiki_link: str) -> str:
 
 
 def subscribed_email(email: str):
+    """HTML for when emails initially sent to subscribers.
+
+    Args:
+        email (str): Email of subscriber.
+
+    Returns:
+        [type]: Returns the HTML for the email.
+    """
     text: str = f"""
     <html>
     <h3>Thank you for joining the mailing list.</h3>

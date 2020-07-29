@@ -129,12 +129,14 @@ def send_email_to_subscribers() -> None:
     Compile email to send to subscribers.
     """
     subscribers: list = db_session.query(Subscriber).filter_by(is_subscribed=True).all()
-    wiki_link = db_session.query(WikiLink).filter(WikiLink.date_used == None).one()
 
-    email_html = link_email("Today's Wikipedia Link", wiki_link.url)
+    if subscribers:
+        wiki_link = db_session.query(WikiLink).filter(WikiLink.date_used == None).one()
 
-    for subscriber in subscribers:
-        send_link_email(wiki_link.title, email_html, subscriber.email)
+        email_html = link_email("Today's Wikipedia Link", wiki_link.url)
 
-    wiki_link.date_used = arrow.utcnow()
-    db_session.commit()
+        for subscriber in subscribers:
+            send_link_email(wiki_link.title, email_html, subscriber.email)
+
+        wiki_link.date_used = arrow.utcnow()
+        db_session.commit()

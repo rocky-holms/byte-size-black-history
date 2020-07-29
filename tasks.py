@@ -134,7 +134,7 @@ def send_email_to_subscribers() -> None:
     subscribers: list = db_session.query(Subscriber).filter_by(is_subscribed=True).all()
 
     if subscribers:
-        wiki_link = db_session.query(WikiLink).filter(WikiLink.date_used == None).one()
+        wiki_link = db_session.query(WikiLink).filter(WikiLink.date_used == None).first()
 
         email_html = link_email("Today's Wikipedia Link", wiki_link.url)
 

@@ -30,6 +30,6 @@ class WikiLink(Base):
     created_ts = Column(ArrowType, default=arrow.utcnow())
     updated_ts = Column(ArrowType)
 
-    url = Column(URLType, nullable=False)
+    url = Column(URLType, nullable=False, unique=True)
     title = Column(Text, nullable=False)
     date_used = Column(ArrowType, nullable=True)

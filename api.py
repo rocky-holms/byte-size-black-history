@@ -1,12 +1,9 @@
-from fastapi import FastAPI, Request, Form, status
+from fastapi import FastAPI, Form, Request, status
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from tasks import (
-    start_subscription,
-    stop_subscription,
-    subscription_confirmation,
-)
+
+from tasks import start_subscription, stop_subscription, subscription_confirmation
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")

@@ -7,7 +7,7 @@ import requests
 from db import db_session
 from models import Subscriber, WikiLink
 from get_emails import link_email, subscribed_email
-from sqlalchemy import update
+from sqlalchemy import update, exc
 
 try:
     MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
@@ -33,7 +33,9 @@ def start_subscription(email: str) -> bool:
         subscriber = Subscriber(email=email)
         db_session.add(subscriber)
         db_session.commit()
-
+        send_confirmation_email(email)
+        return True
+    except exc.IntegrityError:
         send_confirmation_email(email)
         return True
     except Exception as e:
@@ -94,7 +96,7 @@ def send_confirmation_email(email: str) -> int:
         f"https://api.mailgun.net/v3/{DOMAIN_NAME}/messages",
         auth=("api", MAILGUN_API_KEY),
         data={
-            "from": f"Byte Size Black History <mailgun@{DOMAIN_NAME}",
+            "from": f"Byte Size Black History <mailgun@{DOMAIN_NAME}>",
             "to": email,
             "subject": "Thank you for subscribing!",
             "html": subscribed_email(email),

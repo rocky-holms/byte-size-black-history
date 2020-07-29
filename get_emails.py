@@ -24,7 +24,7 @@ def link_email(title: str, wiki_link: str) -> str:
     <hr>
 
     <a href="{DOMAIN_NAME}/donate">donate to great organization fighting for equality for everyone.</a>
-    <a href="{DOMAIN_NAME}/unsubscribe">unsubscribe</a>
+    <a href="http://{DOMAIN_NAME}/unsubscribe">unsubscribe</a>
     </html>
     """
     return text
@@ -35,12 +35,11 @@ def subscribed_email(email: str):
     <html>
     <h3>Thank you for joining the mailing list.</h3>
 
-    <a href="/confirmation/confirm/{email}">Click this link to begin receiving Black History links a day.</a>
+    <a href="{DOMAIN_NAME}/confirmation/confirm/{email}">Click this link to begin receiving Black History links a day.</a>
 
     <hr>
 
-    <a href="{DOMAIN_NAME}/donate">donate to great organization fighting for equality for everyone.</a>
+    <a href="http://{DOMAIN_NAME}/donate">donate to great organization fighting for equality for everyone.</a>
     </html>
     """
     return text
-

@@ -18,7 +18,7 @@ def link_email(title: str, wiki_link: str) -> str:
     """
     text: str = f"""
     <html>
-    <h3>{{title}}</h3>
+    <h3>{title}</h3>
     <a href="{wiki_link}">read wiki page</a>
 
     <hr>

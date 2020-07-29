@@ -2,7 +2,7 @@ import arrow
 from sqlalchemy import Boolean, Column, Integer, Text
 from sqlalchemy_utils import ArrowType, EmailType, URLType
 
-from db import Base
+from db import Base, engine
 
 
 class Subscriber(Base):
@@ -33,3 +33,7 @@ class WikiLink(Base):
     url = Column(URLType, nullable=False, unique=True)
     title = Column(Text, nullable=False)
     date_used = Column(ArrowType, nullable=True)
+
+
+if __name__ == "__main__":
+    Base.metadata.create_all(engine)

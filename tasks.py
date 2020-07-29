@@ -36,6 +36,7 @@ def start_subscription(email: str) -> bool:
         send_confirmation_email(email)
         return True
     except exc.IntegrityError:
+        db_session.rollback()
         send_confirmation_email(email)
         return True
     except Exception as e:

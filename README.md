@@ -31,15 +31,22 @@ These are the list of envvironement variables that need to be set in the postact
 ### DB
 
 1. The following with need to be run to sync the db
-   1. `python`
-   2. `from db import Base, engine`
-   3. `from models import Subscriber, Wikilink`
-   4. `Base.metadata.create_all(engine)`
+   1. `python models.py`
+   2. only needs to be run one time
 
 ### Crontab
 
 1. Will need to be set with the following
    1. `0 0 * * * /usr/bin/python send_daily_email.py`
+   2. This may differ based off your environment
+   3. I recommend `crontab -e`
+
+### Import Links
+
+1. You can create a txt with all the links (I have included one).
+   1. Once the DB is setup:
+      1. You can run `python link_parser.py wiki_link.txt`
+      2. This will create all the entries within the DB.
 
 ## Start the server
 
@@ -66,12 +73,12 @@ These are the list of envvironement variables that need to be set in the postact
 
 ### Additional Project Information
 
-1. A user signs up from the landing page
-2. an email is sent to the user for confirmation
-3. after the user is confirmed
-   1. confirmation email is sent to subscribe
-4. Emails are sent at midnight everyday to all subscribers
-   1. email contains donations page
-   2. Wiki link to Black History
-   3. unsubscribe option
-5. I am including a list of Black History links to be imported to the database via SQLAlchemy
+1. A user signs up from the landing page.
+2. An email is sent to the user for confirmation.
+3. After the user is confirmed
+   1. Confirmation email is sent to subscribe
+4. Emails are sent at midnight everyday to all subscribers.
+   1. Email contains donations page
+   2. Wiki link to Black History.
+   3. Unsubscribe option.
+5. I am including a list of Black History links to be imported to the database via SQLAlchemy.

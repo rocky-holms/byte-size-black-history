@@ -7,7 +7,7 @@ import requests
 from db import db_session
 from models import Subscriber, WikiLink
 from get_emails import link_email, subscribed_email
-
+from sqlalchemy import update
 
 try:
     MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
@@ -32,6 +32,7 @@ def start_subscription(email: str) -> bool:
     try:
         subscriber = Subscriber(email=email)
         db_session.add(subscriber)
+        db_session.commit()
 
         send_confirmation_email(email)
         return True
@@ -50,9 +51,10 @@ def subscription_confirmation(email: str) -> bool:
         bool: if the subscription was created successfully
     """
     try:
-        db_session.query(Subscriber).filter(Subscriber.email == email).update(
-            Subscriber.is_subscribed is True
+        update_statement = (
+            update(Subscriber).where(Subscriber.email == email).values(is_subscribed=True)
         )
+        db_session.execute(update_statement)
         db_session.commit()
         return True
     except Exception as e:
@@ -67,9 +69,12 @@ def stop_subscription(email: str) -> bool:
         email (str): [email associated with subscriber]
     """
     try:
-        db_session.query(Subscriber).filter(Subscriber.email == email).update(
-            Subscriber.is_subscribed is False
+        update_statement = (
+            update(Subscriber)
+            .where(Subscriber.email == email)
+            .values(is_subscribed=False)
         )
+        db_session.execute(update_statement)
         db_session.commit()
         return True
     except Exception as e:

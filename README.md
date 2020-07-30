@@ -6,6 +6,11 @@
    1. Will receive an email daily.
    2. Email will contain a link to donations page to different African American organizations.
    3. Email will contain a different wiki link sent daily.
+   
+## Current Site
+
+1. This is the current URL to the site: https://bytesizeblackhistory.online
+   1. Works with current implemenation
 
 ## Setup
 

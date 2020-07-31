@@ -4,7 +4,7 @@ import os
 import sys
 from typing import Union
 
-from sqlalchemy import insert
+from sqlalchemy import insert, exc
 
 from db import db_session
 from models import WikiLink
@@ -57,6 +57,9 @@ def link_to_db(link_data: dict) -> None:
         insert_statement = insert(WikiLink).values(link_data)
         db_session.execute(insert_statement)
         db_session.commit()
+    except exc.IntegrityError:
+        db_session.rollback()
+        logging.error(f"Link data already in DB: {link_data}")
     except Exception as e:
         logging.error(f"Unable to add data to DB. Data: {link_data} | Error: {e}")
 

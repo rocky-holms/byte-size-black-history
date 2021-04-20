@@ -36,5 +36,5 @@ ENV MAILGUN_API_KEY='YOUR KEY FOR EMAIL'
 ENV DOMAIN_NAME='YOUR DOMAIN FOR EMAIL'
 
 
-RUN python src/api/models.py
-RUN python src/utils/link_parser.py wiki_links.txt
+RUN python /app/src/api/models.py
+RUN python /app/src/utils/link_parser.py wiki_links.txt

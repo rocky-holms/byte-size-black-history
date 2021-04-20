@@ -56,6 +56,7 @@
 3. Postgres for DB
 4. Jinja2 for displaying pages
 5. Docker
+6. Poetry
 
 ### Additional Project Information
 

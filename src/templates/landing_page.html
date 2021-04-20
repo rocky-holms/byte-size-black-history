@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Byte Size Black History</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+    body {
+      background: #ddd;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    h3 {
+      text-transform: uppercase;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin: 0 0 15px 0;
+      padding: 0;
+      color: #555;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    form {
+      width: 428px;
+      margin: 100px auto;
+      padding: 50px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    input {
+      font-family: 'PT Sans Narrow';
+      font-size: 20px;
+      height: 30px;
+
+    }
+
+    .info {
+      display: inline-block;
+      margin-right: 5px;
+
+    }
+
+    .info input {
+      display: block;
+      width: 300px;
+      height: 20px;
+      border: 1px solid #555;
+      border-radius: 3px;
+      margin: 0 0 10px 0;
+      padding: 12px 10px;
+
+      /* background: #fff; */
+    }
+
+    .info input:last-child {
+      margin: 0;
+    }
+
+    .info input:focus {
+      background: #eee;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      vertical-align: top;
+      height: 44px;
+      /* width: 114px; */
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 3px;
+      background: pink;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      /* background: linear-gradient(45deg, #FF6C54, #FFA754); */
+      background-color: #FF6C54;
+    }
+
+    input[type="submit"]:hover {
+      background: linear-gradient(180deg, #FF6C54);
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <form method="post" action="/confirmation/subscribe">
+      <h3>Learn Black History by receiving a wikipedia link daily.</h3>
+      <p>No spam, unsubscribe at any time.</p>
+      <div class="info">
+        <input type="email" name="email" placeholder="Your Email">
+        <input type="submit" value="Subscribe">
+      </div>
+
+    </form>
+  </div>
+</body>
+
+</html>

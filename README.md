@@ -6,57 +6,37 @@
    1. Will receive an email daily.
    2. Email will contain a link to donations page to different African American organizations.
    3. Email will contain a different wiki link sent daily.
-   
+
 ## Current Site
 
 1. This is the current URL to the site: https://bytesizeblackhistory.online
-   1. Works with current implemenation
+   1. Works with current implementation
 
 ## Setup
 
-## Python Version
+### Python Version
 
-1. Requires Python 3.7.5 or greater
+1. Requires Python 3.8 or greater
 
-### Environment Variables
+### Docker Environment Variables
 
-These are the list of envvironement variables that need to be set in the postactivate file of your virtualenv
-
-1. `DB_URL` ->  URL associated with Postgres
-   1. Format as: `postgres://username:password@localhost/db_name`
-2. `MAILGUN_API_KEY` -> Mailgun API key
-3. `DOMAIN_NAME` -> Full URL associate with Mailgun
-   1. Example: `https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages`
-
-## Additional Settings
-
-1. run `pip install -r requirements.txt` after virtualenv is activated
-2. you can optionally install dev requirements with `pip install -r dev-requirements.txt`
-
-### DB
-
-1. The following with need to be run to sync the db
-   1. `python models.py`
-   2. only needs to be run one time
-
+1. `ENV MAILGUN_API_KEY` will need to be set with the Mailgun API Key
+2. `ENV DOMAIN_NAME` will need to be set for email purposes
+### Additional Settings
+1. `docker build -t image_name .`
+2. locally run the application within Docker with:
+   * `docker run --name container_name -d -p 8000:80 image_id`
+   * you can check the image id with `docker images`
 ### Crontab
 
-1. Will need to be set with the following
-   1. `0 0 * * * /usr/bin/python send_daily_email.py`
-   2. This may differ based off your environment
-   3. I recommend `crontab -e`
-
+1. Will need to be started within container
+   * `/etc/init.d/cron start`
 ### Import Links
 
 1. You can create a txt with all the links (I have included one).
    1. Once the DB is setup:
-      1. You can run `python link_parser.py wiki_link.txt`
+      1. You can run `python /app/src/utils/link_parser.py wiki_link.txt`
       2. This will create all the entries within the DB.
-
-## Start the server
-
-1. the server can be started by running:
-   1. `uvicorn api:app`
 
 ## Tests
 
@@ -75,6 +55,7 @@ These are the list of envvironement variables that need to be set in the postact
 2. SQLAlchemy
 3. Postgres for DB
 4. Jinja2 for displaying pages
+5. Docker
 
 ### Additional Project Information
 

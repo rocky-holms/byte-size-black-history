@@ -30,6 +30,7 @@
 ### Crontab
 
 1. Will need to be started within container
+   * remember to set the variable values in the cron file as well (this can be changed or setup differently depending on env).
    * `/etc/init.d/cron start`
 ### Import Links
 
